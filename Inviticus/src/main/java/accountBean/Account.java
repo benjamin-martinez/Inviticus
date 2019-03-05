@@ -14,56 +14,71 @@ package accountBean;
  */
 public class Account {
     
-     private String mUsername, mEmail, mPassword, mFullName;
-     private int mAge;
+     private String username, email, password, firstName, lastName;
+     private int age, id;
     
-    public Account(String username, String email, String password, String fullname, int age) {
-        this.mFullName = fullname;
-        this.mUsername = username;
-        this.mEmail = email;
-        this.mPassword = password;
-        this.mAge = age;
+    public Account(String username, String email, String password, String firstName, String lastName, int age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.age = age;
     }
 
-    public String getmUsername() {
-        return mUsername;
-    }
-
-    public String getmEmail() {
-        return mEmail;
-    }
-
-    public String getmPassword() {
-        return mPassword;
+    public int getId() {
+        return id;
     }
     
-    public String getmFullName() {
-        return mFullName;
+    public String getUsername() {
+        return username;
     }
 
-    public int getmAge() {
-        return mAge;
+    public String getEmail() {
+        return email;
     }
 
-    public void setmUsername(String mUsername) {
-        this.mUsername = mUsername;
-    }
-
-    public void setmEmail(String mEmail) {
-        this.mEmail = mEmail;
-    }
-
-    public void setmPassword(String mPassword) {
-        this.mPassword = mPassword;
-    }
-
-    public void setmFullName(String mFullName) {
-        this.mFullName = mFullName;
-    }
-
-    public void setmAge(int mAge) {
-        this.mAge = mAge;
+    public String getPassword() {
+        return password;
     }
     
+    public String getFirstName() {
+        return firstName;
+    }
     
+    public String getLastName() {
+        return lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
 }

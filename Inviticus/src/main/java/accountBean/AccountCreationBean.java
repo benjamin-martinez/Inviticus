@@ -5,7 +5,6 @@
  */
 package accountBean;
 
-import java.util.Scanner;
 
 /**
  * This class tests the logic for the account.
@@ -15,11 +14,14 @@ import java.util.Scanner;
  *  Syntax of password, minimum length, at least one uppercase letter
  *  Age above 16
  * @author Karl
+ * @author Ben
  */
-public class AccountCreationBean extends Account{
+public class AccountCreationBean{
     
-    public AccountCreationBean(String username, String email, String password, String fullname, int age) {
-        super(username, email, password, fullname, age);
+    private Account newAccount;
+    
+    public AccountCreationBean(Account newAccount) {
+        this.newAccount = newAccount;
     }
     
     public void main(String[] args) {
@@ -27,51 +29,40 @@ public class AccountCreationBean extends Account{
     }
     
     public void checkAccount(){
-        checkFullName();
-        checkUsername();
-        checkEmail();
-        checkPassword();
-        checkAge();
-    }
-    
-    /**
-     * Full Name needs to be at least 4 letters
-     */
-    public void checkFullName() {
-        if(getmFullName() <= 4)
-            
+        verifyUsername();
+        verifyEmail();
+        verifyPassword();
+        verifyAge();
     }
     
     /**
      * Username needs to be at least 5 letters
      */
-    public void checkUsername() {
-        
+    public boolean verifyUsername() {
+        return false;
     }
     
     /**
      * Checks to see if the email is a valid email
      */
-    public void checkEmail() {
-        
+    public boolean verifyEmail() {
+        return false;
     }
     
     /**
      * Minimum length should be 6 with at least 1 uppercase letter
      */
-    public void checkPassword() {
-        
+    public boolean verifyPassword() {
+        return false;
     }
     
     /**
      * A user must be at least 16 years old
      */
-    public String checkAge() {
-        if(getmAge() < 16)
-            return "You must be at least 16 years or older.";
-        
-        else {
-            return Integer.toString(getmAge());
-        }
+    public boolean verifyAge() {
+        if(newAccount.getAge() < 16)
+            return false;
+        else 
+            return true;
     }
 }

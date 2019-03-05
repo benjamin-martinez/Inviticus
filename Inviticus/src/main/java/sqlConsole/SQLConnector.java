@@ -72,7 +72,6 @@ public class SQLConnector {
     
     public void updateUserTable(Account account)
     {
-        boolean found = false;
         if(!isConnectionOpen)
         {
             
@@ -80,67 +79,84 @@ public class SQLConnector {
         else
         {
             try {
-            PreparedStatement prepStatement = connection.prepareStatement("INSERT INTO Users ( )");
-            prepStatement.setString(1, fieldName);
+                PreparedStatement prepStatement = connection.prepareStatement("INSERT INTO Users " + 
+                        "(first_name, last_name, age, username, password, email)" +
+                        " values(?,?,?,?,?,?);");
+                prepStatement.setString(1, account.getFirstName());
+                prepStatement.setString(2, account.getLastName());
+                prepStatement.setInt(3, account.getAge());
+                prepStatement.setString(4, account.getUsername());
+                prepStatement.setString(5, account.getPassword());
+                prepStatement.setString(6, account.getEmail());
  
-            ResultSet resObj = prepStatement.executeQuery();
-            while(resObj.next()) {
-                System.out.println("Loan Type?= " + resObj.getString("loan_type"));
-            }
-            }   catch (Exception sqlException) {
+                //ResultSet resObj = prepStatement.executeQuery();
+                prepStatement.executeQuery();
+                
+            }   
+            catch (Exception sqlException) {
             sqlException.printStackTrace();
             }
         }
     }
     
-    public void updateTeamTable()
-    {
-        boolean found = false;
-        if(!isConnectionOpen)
-        {
-            
-        }
-        else
-        {
-            try {
-            PreparedStatement prepStatement = connection.prepareStatement("SELECT " + columnName + " FROM " + tableName + " WHERE =?");
-            prepStatement.setString(1, fieldName);
- 
-            ResultSet resObj = prepStatement.executeQuery();
-            while(resObj.next()) {
-                System.out.println("Loan Type?= " + resObj.getString("loan_type"));
-            }
-            }   catch (Exception sqlException) {
-            sqlException.printStackTrace();
-            }
-        }
-    }
+//    public void updateTeamTable()
+//    {
+//        boolean found = false;
+//        if(!isConnectionOpen)
+//        {
+//            
+//        }
+//        else
+//        {
+//            try {
+//            PreparedStatement prepStatement = connection.prepareStatement("SELECT " + columnName + " FROM " + tableName + " WHERE =?");
+//            prepStatement.setString(1, fieldName);
+// 
+//            ResultSet resObj = prepStatement.executeQuery();
+//            while(resObj.next()) {
+//                System.out.println("Loan Type?= " + resObj.getString("loan_type"));
+//            }
+//            }   catch (Exception sqlException) {
+//            sqlException.printStackTrace();
+//            }
+//        }
+//    }
     
-    public void updateEventTable()
-    {
-        boolean found = false;
-        if(!isConnectionOpen)
-        {
-            
-        }
-        else
-        {
-            try {
-            PreparedStatement prepStatement = connection.prepareStatement("SELECT " + columnName + " FROM " + tableName + " WHERE =?");
-            prepStatement.setString(1, fieldName);
- 
-            ResultSet resObj = prepStatement.executeQuery();
-            while(resObj.next()) {
-                System.out.println("Loan Type?= " + resObj.getString("loan_type"));
-            }
-            }   catch (Exception sqlException) {
-            sqlException.printStackTrace();
-            }
-        }
-    }
+//    public void updateEventTable()
+//    {
+//        boolean found = false;
+//        if(!isConnectionOpen)
+//        {
+//            
+//        }
+//        else
+//        {
+//            try {
+//            PreparedStatement prepStatement = connection.prepareStatement("SELECT " + columnName + " FROM " + tableName + " WHERE =?");
+//            prepStatement.setString(1, fieldName);
+// 
+//            ResultSet resObj = prepStatement.executeQuery();
+//            while(resObj.next()) {
+//                System.out.println("Loan Type?= " + resObj.getString("loan_type"));
+//            }
+//            }   catch (Exception sqlException) {
+//            sqlException.printStackTrace();
+//            }
+//        }
+//    }
     
     public Connection getConnection()
     {
         return connection;
+    }
+    
+    public void close()
+    {
+        try{
+        connection.close();
+        }
+        catch(Exception sqlExcpetion){
+            
+        }
     }
 }

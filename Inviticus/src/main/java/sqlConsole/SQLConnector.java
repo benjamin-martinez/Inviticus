@@ -99,6 +99,28 @@ public class SQLConnector {
         }
     }
     
+    public void deleteUser(Account account)
+    {
+        if(!isConnectionOpen)
+        {
+            
+        }
+        else
+        {
+            try {
+                PreparedStatement prepStatement = connection.prepareStatement("DELETE FROM Users WHERE username=?");
+                prepStatement.setString(1, account.getUsername());
+ 
+                //ResultSet resObj = prepStatement.executeQuery();
+                prepStatement.executeQuery();
+                
+            }   
+            catch (Exception sqlException) {
+            sqlException.printStackTrace();
+            }
+        }
+    }
+    
 //    public void updateTeamTable(Team team)
 //    {
 //        if(!isConnectionOpen)

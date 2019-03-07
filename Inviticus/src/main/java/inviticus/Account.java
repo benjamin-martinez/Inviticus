@@ -7,6 +7,8 @@
  */
 package inviticus;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Benjamin
@@ -16,6 +18,7 @@ public class Account {
     
      private String username, email, password, firstName, lastName;
      private int age, id;
+     private ArrayList<Team> teamAffiliations, preferredActivities;
     
     public Account(String username, String email, String password, String firstName, String lastName, int age) {
         this.firstName = firstName;

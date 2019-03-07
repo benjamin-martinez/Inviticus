@@ -7,8 +7,67 @@ package inviticus;
 
 /**
  *
- * @author Benjamin
+ * @author martinezb3
  */
 public class Team {
     
+    private String name;
+    private Account admin;
+    private String prefferedActivity;
+    private String city;
+    private String state;
+    private String country;
+
+    public Team(){
+        
+    }
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPrefferedActivity() {
+        return prefferedActivity;
+    }
+
+    public void setPrefferedActivity(String prefferedActivity) {
+        this.prefferedActivity = prefferedActivity;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+    
+    public Account getAdmin() {
+        return admin;
+    }
+    
+    public void setAdmin(Account account) {
+        this.admin = account;
+    }
 }
+

@@ -5,7 +5,7 @@
  */
 package sqlConsole;
 
-import accountBean.Account;
+import inviticus.Account;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -63,7 +63,7 @@ public class SQLConnector {
             while(resObj.next()) {
                 found = true;
             }
-            }   catch (Exception sqlException) {
+            }   catch (SQLException sqlException) {
                 sqlException.printStackTrace();
             }
         }
@@ -99,9 +99,30 @@ public class SQLConnector {
         }
     }
     
-//    public void updateTeamTable()
+    public void deleteUser(Account account)
+    {
+        if(!isConnectionOpen)
+        {
+            
+        }
+        else
+        {
+            try {
+                PreparedStatement prepStatement = connection.prepareStatement("DELETE FROM Users WHERE username=?");
+                prepStatement.setString(1, account.getUsername());
+ 
+                //ResultSet resObj = prepStatement.executeQuery();
+                prepStatement.executeQuery();
+                
+            }   
+            catch (Exception sqlException) {
+            sqlException.printStackTrace();
+            }
+        }
+    }
+    
+//    public void updateTeamTable(Team team)
 //    {
-//        boolean found = false;
 //        if(!isConnectionOpen)
 //        {
 //            
@@ -109,20 +130,27 @@ public class SQLConnector {
 //        else
 //        {
 //            try {
-//            PreparedStatement prepStatement = connection.prepareStatement("SELECT " + columnName + " FROM " + tableName + " WHERE =?");
-//            prepStatement.setString(1, fieldName);
+//                PreparedStatement prepStatement = connection.prepareStatement("INSERT INTO Teams " + 
+//                        "(name, leader, city, state, country, preferred_activity)" +
+//                        " values(?,?,?,?,?,?);");
+//                prepStatement.setString(1, team.getName());
+//                prepStatement.setString(2, team.getLeader());
+//                prepStatement.setInt(3, team.getCity());
+//                prepStatement.setString(4, team.getState());
+//                prepStatement.setString(5, team.getCountry());
+//                prepStatement.setString(6, team.getPrefferedActivity());
 // 
-//            ResultSet resObj = prepStatement.executeQuery();
-//            while(resObj.next()) {
-//                System.out.println("Loan Type?= " + resObj.getString("loan_type"));
-//            }
-//            }   catch (Exception sqlException) {
+//                //ResultSet resObj = prepStatement.executeQuery();
+//                prepStatement.executeQuery();
+//                
+//            }   
+//            catch (Exception sqlException) {
 //            sqlException.printStackTrace();
 //            }
 //        }
 //    }
     
-//    public void updateEventTable()
+//    public void updateEventTable(Event event)
 //    {
 //        boolean found = false;
 //        if(!isConnectionOpen)
@@ -132,14 +160,10 @@ public class SQLConnector {
 //        else
 //        {
 //            try {
-//            PreparedStatement prepStatement = connection.prepareStatement("SELECT " + columnName + " FROM " + tableName + " WHERE =?");
-//            prepStatement.setString(1, fieldName);
-// 
-//            ResultSet resObj = prepStatement.executeQuery();
-//            while(resObj.next()) {
-//                System.out.println("Loan Type?= " + resObj.getString("loan_type"));
-//            }
-//            }   catch (Exception sqlException) {
+//               
+//                
+//            }   
+//            catch (Exception sqlException) {
 //            sqlException.printStackTrace();
 //            }
 //        }

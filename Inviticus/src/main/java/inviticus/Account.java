@@ -5,7 +5,7 @@
  * Checking to see if an email has already signed up, a username has been taken.
  * Later we will implement password restrictions
  */
-package accountBean;
+package inviticus;
 
 /**
  *

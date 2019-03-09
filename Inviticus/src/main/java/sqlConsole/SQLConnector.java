@@ -5,7 +5,7 @@
  */
 package sqlConsole;
 
-import inviticus.Account;
+import inviticus.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -45,7 +45,7 @@ public class SQLConnector {
         }
     }
     
-    public boolean searchDatabase(String fieldName, String columnName, String tableName)
+    public boolean existsInDatabase(String fieldName, String columnName, String tableName)
     {
         boolean found = false;
         
@@ -80,14 +80,25 @@ public class SQLConnector {
         {
             try {
                 PreparedStatement prepStatement = connection.prepareStatement("INSERT INTO Users " + 
-                        "(first_name, last_name, age, username, password, email)" +
-                        " values(?,?,?,?,?,?);");
-                prepStatement.setString(1, account.getFirstName());
-                prepStatement.setString(2, account.getLastName());
-                prepStatement.setInt(3, account.getAge());
-                prepStatement.setString(4, account.getUsername());
-                prepStatement.setString(5, account.getPassword());
-                prepStatement.setString(6, account.getEmail());
+                        "(username, password, email, first_name, last_name, age, city, state, country, " +
+                        "exercise_focus1, exercise_focus2, exercise_focus3, " +
+                        "affiliated_team1, affiliated_team2, affiliated_team3)" +
+                        " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+                prepStatement.setString(1, account.getUsername());
+                prepStatement.setString(2, account.getPassword());
+                prepStatement.setString(3, account.getEmail());
+                prepStatement.setString(4, account.getFirstName());
+                prepStatement.setString(5, account.getLastName());
+                prepStatement.setInt(6, account.getAge());
+                prepStatement.setString(7, account.getCity());
+                prepStatement.setString(8, account.getState());
+                prepStatement.setString(9, account.getCountry());
+                prepStatement.setString(10, account.getExerciseFoci().get(0).getName());
+                prepStatement.setString(11, account.getExerciseFoci().get(1).getName());
+                prepStatement.setString(12, account.getExerciseFoci().get(2).getName());
+                prepStatement.setString(13, account.getTeamAffiliations().get(0).getName());
+                prepStatement.setString(14, account.getTeamAffiliations().get(1).getName());
+                prepStatement.setString(15, account.getTeamAffiliations().get(2).getName());
  
                 //ResultSet resObj = prepStatement.executeQuery();
                 prepStatement.executeQuery();
@@ -121,53 +132,161 @@ public class SQLConnector {
         }
     }
     
-//    public void updateTeamTable(Team team)
-//    {
-//        if(!isConnectionOpen)
-//        {
-//            
-//        }
-//        else
-//        {
-//            try {
-//                PreparedStatement prepStatement = connection.prepareStatement("INSERT INTO Teams " + 
-//                        "(name, leader, city, state, country, preferred_activity)" +
-//                        " values(?,?,?,?,?,?);");
-//                prepStatement.setString(1, team.getName());
-//                prepStatement.setString(2, team.getLeader());
-//                prepStatement.setInt(3, team.getCity());
-//                prepStatement.setString(4, team.getState());
-//                prepStatement.setString(5, team.getCountry());
-//                prepStatement.setString(6, team.getPrefferedActivity());
-// 
-//                //ResultSet resObj = prepStatement.executeQuery();
-//                prepStatement.executeQuery();
-//                
-//            }   
-//            catch (Exception sqlException) {
-//            sqlException.printStackTrace();
-//            }
-//        }
-//    }
+    public void updateTeamTable(Team team)
+    {
+        if(!isConnectionOpen)
+        {
+            
+        }
+        else
+        {
+            try {
+                PreparedStatement prepStatement = connection.prepareStatement("INSERT INTO Teams " + 
+                        "(name, city, state, country, admin1, admin2, admin3, " +
+                        "exercise_focus1, exercise_focus2, exercise_focus3)" +
+                        " values(?,?,?,?,?,?,?,?,?,?);");
+                prepStatement.setString(1, team.getName());
+                prepStatement.setString(2, team.getCity());
+                prepStatement.setString(3, team.getState());
+                prepStatement.setString(4, team.getCountry());
+                prepStatement.setString(5, team.getAdmins().get(0).getUsername());
+                prepStatement.setString(6, team.getAdmins().get(1).getUsername());
+                prepStatement.setString(7, team.getAdmins().get(2).getUsername());
+                prepStatement.setString(8, team.getExerciseFoci().get(0).getName());
+                prepStatement.setString(9, team.getExerciseFoci().get(1).getName());
+                prepStatement.setString(10, team.getExerciseFoci().get(2).getName());
+ 
+                //ResultSet resObj = prepStatement.executeQuery();
+                prepStatement.executeQuery();
+                
+            }   
+            catch (Exception sqlException) {
+            sqlException.printStackTrace();
+            }
+        }
+    }
     
-//    public void updateEventTable(Event event)
-//    {
-//        boolean found = false;
-//        if(!isConnectionOpen)
-//        {
-//            
-//        }
-//        else
-//        {
-//            try {
-//               
-//                
-//            }   
-//            catch (Exception sqlException) {
-//            sqlException.printStackTrace();
-//            }
-//        }
-//    }
+    public void deleteTeam(Team team)
+    {
+        if(!isConnectionOpen)
+        {
+            
+        }
+        else
+        {
+            try {
+                PreparedStatement prepStatement = connection.prepareStatement("DELETE FROM Teams WHERE name=?");
+                prepStatement.setString(1, team.getName());
+ 
+                //ResultSet resObj = prepStatement.executeQuery();
+                prepStatement.executeQuery();
+                
+            }   
+            catch (Exception sqlException) {
+            sqlException.printStackTrace();
+            }
+        }
+    }
+    
+    public void updateEventTable(Event event)
+    {
+        if(!isConnectionOpen)
+        {
+            
+        }
+        else
+        {
+            try {
+                PreparedStatement prepStatement = connection.prepareStatement("INSERT INTO Teams " + 
+                        "(name, time, exercise_focus, venue, city, state, country)" +
+                        " values(?,?,?,?,?,?,?);");
+                prepStatement.setString(1, event.getName());
+                prepStatement.setTimestamp(2, event.getTime());
+                prepStatement.setString(3, event.getExerciseFocus().getName());
+                prepStatement.setString(4, event.getVenue());
+                prepStatement.setString(5, event.getCity());
+                prepStatement.setString(6, event.getState());
+                prepStatement.setString(7, event.getCountry());
+ 
+                //ResultSet resObj = prepStatement.executeQuery();
+                prepStatement.executeQuery();
+                
+            }   
+            catch (Exception sqlException) {
+            sqlException.printStackTrace();
+            }
+        }
+    }
+    
+    public void deleteEvent(Event event)
+    {
+        if(!isConnectionOpen)
+        {
+            
+        }
+        else
+        {
+            try {
+                PreparedStatement prepStatement = connection.prepareStatement("DELETE FROM Events WHERE name=?");
+                prepStatement.setString(1, event.getName());
+ 
+                //ResultSet resObj = prepStatement.executeQuery();
+                prepStatement.executeQuery();
+                
+            }   
+            catch (Exception sqlException) {
+            sqlException.printStackTrace();
+            }
+        }
+    }
+    
+    public void updateExerciseFociTable(ExerciseFocus exerciseFocus)
+    {
+        if(!isConnectionOpen)
+        {
+            
+        }
+        else
+        {
+            try {
+                PreparedStatement prepStatement = connection.prepareStatement("INSERT INTO ExerciseFoci " + 
+                        "(name, exercise_type, primarily_outdoors)" +
+                        " values(?,?,?);");
+                prepStatement.setString(1, exerciseFocus.getName());
+                prepStatement.setString(2, exerciseFocus.getExerciseType());
+                prepStatement.setBoolean(3, exerciseFocus.isIsPrimarilyOutdoors());
+ 
+                //ResultSet resObj = prepStatement.executeQuery();
+                prepStatement.executeQuery();
+                
+            }   
+            catch (Exception sqlException) {
+            sqlException.printStackTrace();
+            }
+        }
+    }
+    
+    public void deleteExerciseFocus(ExerciseFocus exerciseFocus)
+    {
+        if(!isConnectionOpen)
+        {
+            
+        }
+        else
+        {
+            try {
+                PreparedStatement prepStatement = connection.prepareStatement("DELETE FROM ExerciseFocus WHERE name=?");
+                prepStatement.setString(1, exerciseFocus.getName());
+ 
+                //ResultSet resObj = prepStatement.executeQuery();
+                prepStatement.executeQuery();
+                
+            }   
+            catch (Exception sqlException) {
+            sqlException.printStackTrace();
+            }
+        }
+    }
     
     public Connection getConnection()
     {

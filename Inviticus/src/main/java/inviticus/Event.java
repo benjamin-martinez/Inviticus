@@ -1,4 +1,3 @@
-Event
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,8 +5,8 @@ Event
  */
 package inviticus;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
@@ -16,9 +15,9 @@ import java.util.Date;
 public class Event {
     
     private String name;
-    private Date time;
+    private Timestamp time;
     private ArrayList<Account> attendees;
-    private String activity;
+    private ExerciseFocus exerciseFocus;
     private String venue;
     private String city;
     private String state;
@@ -33,12 +32,12 @@ public class Event {
         return name;
     }
 
-    public Date getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public String getActivity() {
-        return activity;
+    public ExerciseFocus getExerciseFocus() {
+        return exerciseFocus;
     }
     
     public ArrayList<Account> getAttendees() {
@@ -49,12 +48,12 @@ public class Event {
         this.name = name;
     }
 
-    public void setTime(Date time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 
-    public void setActivity(String activity) {
-        this.activity = activity;
+    public void setExerciseFocus(ExerciseFocus exerciseFocus) {
+        this.exerciseFocus = exerciseFocus;
     }
     
     public void setAttendees(){
@@ -65,8 +64,42 @@ public class Event {
         attendees.add(account);
     }
     
-    public Account removeAttendee(Account account) {
-        return attendees.remove(account);
+    public void removeAttendee(Account account) {
+        attendees.remove(account);
     }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+    
+    
     
 }

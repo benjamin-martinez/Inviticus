@@ -5,6 +5,8 @@
  */
 package inviticus;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author martinezb3
@@ -12,11 +14,12 @@ package inviticus;
 public class Team {
     
     private String name;
-    private Account admin;
-    private String prefferedActivity;
     private String city;
     private String state;
     private String country;
+    private ArrayList<Account> members;
+    private ArrayList<Account> admins;
+    private ArrayList<ExerciseFocus> exerciseFoci;
 
     public Team(){
         
@@ -28,14 +31,6 @@ public class Team {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPrefferedActivity() {
-        return prefferedActivity;
-    }
-
-    public void setPrefferedActivity(String prefferedActivity) {
-        this.prefferedActivity = prefferedActivity;
     }
 
     public String getCity() {
@@ -61,13 +56,22 @@ public class Team {
     public void setCountry(String country) {
         this.country = country;
     }
-    
-    public Account getAdmin() {
-        return admin;
+
+    public ArrayList<Account> getAdmins() {
+        return admins;
+    }
+
+    public void setAdmins(ArrayList<Account> admins) {
+        this.admins = admins;
+    }
+
+    public ArrayList<ExerciseFocus> getExerciseFoci() {
+        return exerciseFoci;
+    }
+
+    public void setExerciseFoci(ArrayList<ExerciseFocus> exerciseFoci) {
+        this.exerciseFoci = exerciseFoci;
     }
     
-    public void setAdmin(Account account) {
-        this.admin = account;
-    }
 }
 

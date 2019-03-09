@@ -17,8 +17,9 @@ import java.util.ArrayList;
 public class Account {
     
      private String username, email, password, firstName, lastName;
-     private int age, id;
-     private ArrayList<Team> teamAffiliations, preferredActivities;
+     private String city, state, country;
+     private int age; 
+     private ArrayList<Team> teamAffiliations, exerciseFoci;
     
     public Account(String username, String email, String password, String firstName, String lastName, int age) {
         this.firstName = firstName;
@@ -27,10 +28,6 @@ public class Account {
         this.email = email;
         this.password = password;
         this.age = age;
-    }
-
-    public int getId() {
-        return id;
     }
     
     public String getUsername() {
@@ -80,8 +77,45 @@ public class Account {
     public void setAge(int age) {
         this.age = age;
     }
-    
-    public void setId(int id) {
-        this.id = id;
+
+    public String getCity() {
+        return city;
     }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public ArrayList<Team> getTeamAffiliations() {
+        return teamAffiliations;
+    }
+
+    public void setTeamAffiliations(ArrayList<Team> teamAffiliations) {
+        this.teamAffiliations = teamAffiliations;
+    }
+
+    public ArrayList<Team> getExerciseFoci() {
+        return exerciseFoci;
+    }
+
+    public void setExerciseFoci(ArrayList<Team> exerciseFoci) {
+        this.exerciseFoci = exerciseFoci;
+    }
+    
 }

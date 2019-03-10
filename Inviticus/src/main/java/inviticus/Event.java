@@ -7,6 +7,7 @@ package inviticus;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import sqlConsole.*;
 
 /**
  *
@@ -23,7 +24,8 @@ public class Event {
     private String state;
     private String country;
 
-    public Event()
+    public Event(String name, String venue, String city, String state, String country, 
+            ExerciseFocus exerciseFocus, Timestamp time)
     {
         
     }

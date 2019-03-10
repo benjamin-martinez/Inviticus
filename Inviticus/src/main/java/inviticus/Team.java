@@ -21,7 +21,9 @@ public class Team {
     private ArrayList<Account> admins;
     private ArrayList<ExerciseFocus> exerciseFoci;
 
-    public Team(){
+    public Team(String name, String city, String state,
+            String country, ArrayList<Account> members,
+            ArrayList<Account> admins, ArrayList<ExerciseFocus> exerciseFoci) {
         
     }
     

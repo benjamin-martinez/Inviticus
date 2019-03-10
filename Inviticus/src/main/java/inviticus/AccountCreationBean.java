@@ -7,6 +7,7 @@ package inviticus;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import sqlConsole.SQLConnector;
 
 /**
  * This class tests the logic for the account.
@@ -32,10 +33,21 @@ public class AccountCreationBean{
     }
     
     public void checkAccount(){
-        verifyUsername();
-        verifyEmail();
-        verifyPassword();
-        verifyAge();
+        boolean passed = false;
+        if(!verifyUsername())
+            // if failed, give user feedback
+        if(verifyEmail())
+            // if failed, give user feedback
+        if(verifyPassword())
+            // if failed, give user feedback
+        if(verifyAge())
+            // if failed, give user feedback
+        if(passed == true) {
+            SQLConnector connector = new SQLConnector();
+            connector.updateUserTable(newAccount);
+            connector.close();
+        }
+            
     }
     
     /**
@@ -44,6 +56,13 @@ public class AccountCreationBean{
     public boolean verifyUsername() {
         if(newAccount.getUsername().length() < 6)
             return false;
+        
+        SQLConnector connector = new SQLConnector();
+        boolean exists = connector.existsInDatabase(newAccount.getUsername(), "username", "Users");
+        if(!exists)
+            return false;
+        connector.close();
+        
         return true;
     }
     
@@ -60,7 +79,13 @@ public class AccountCreationBean{
         if(newAccount.getEmail() == null)
             return false;
         
+        SQLConnector connector = new SQLConnector();
+        boolean exists = connector.existsInDatabase(newAccount.getEmail(), "email", "Users");
+        if(!exists)
+            return false;
+        connector.close();
         // before this return I need to see if the email exists
+        
         return true;
     }
     
@@ -78,9 +103,10 @@ public class AccountCreationBean{
                 upperCaseFlag = true;
         }
         
-        if(upperCaseFlag)
-            return true;
-        return false;
+        if(upperCaseFlag == false)
+            return false;
+        
+        return true;
     }
     
     /**
@@ -89,7 +115,7 @@ public class AccountCreationBean{
     public boolean verifyAge() {
         if(newAccount.getAge() < 16)
             return false;
-        else 
-            return true;
+        
+        return true;
     }
 }

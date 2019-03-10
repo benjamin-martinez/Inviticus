@@ -5,6 +5,9 @@
  */
 package inviticus;
 
+
+import sqlConsole.SQLConnector;
+
 /**
  *
  * @author martinezb3
@@ -30,10 +33,20 @@ public class TeamCreationBean {
         
         //if team does not exist already in the DB, and validation checks are passed,
             //add team to DB
+        
+        SQLConnector connector = new SQLConnector();
+        boolean exists = connector.existsInDatabase(team.getName(),
+                        "team", "Team");
+        if(exists == true)
+            // Give user choice to rename team or what ever else needs to be changed
+            return;
+        connector.close();
     }
     
-    public Team deleteTeam(){
-        
+    public void deleteTeam(){
+        SQLConnector connector = new SQLConnector();
+        connector.deleteTeam(team);
+        connector.close();
     }
     
 }

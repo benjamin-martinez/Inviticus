@@ -9,7 +9,7 @@ package inviticus;
 import sqlConsole.SQLConnector;
 
 /**
- *
+ * @author karl cebulski
  * @author martinezb3
  */
 public class TeamCreationBean {
@@ -39,13 +39,21 @@ public class TeamCreationBean {
                         "team", "Team");
         if(exists == true)
             // Give user choice to rename team or what ever else needs to be changed
-            return;
+            throw new IllegalArgumentException("Team Name already exists.");
+        else {
+            connector.updateTeamTable(team);
+        }
         connector.close();
     }
     
     public void deleteTeam(){
         SQLConnector connector = new SQLConnector();
+        try {
         connector.deleteTeam(team);
+        }
+        catch(NullPointerException npe) {
+            
+        }
         connector.close();
     }
     

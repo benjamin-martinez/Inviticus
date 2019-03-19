@@ -31,9 +31,13 @@ public class EventCreationBean {
             //for validation. 
         SQLConnector connector = new SQLConnector();
         boolean exists = connector.existsInDatabase(newEvent.getName(), "event", "Team");
-        if(exists)
+        if(exists == true)
             // Give user choice to rename event or what ever else needs to be changed
-            return;
+            throw new IllegalArgumentException("Event already exists.");
+        
+        else {
+            connector.updateEventTable(newEvent);
+        }
         connector.close();
         //if event does not exist already in the DB, and validation checks are passed,
             //add event to DB
